@@ -288,7 +288,7 @@ where
             };
             renderer.fill_text(
                 Text {
-                    content: format!("{}%", self.value.to_string()),
+                    content: format!("{}%", self.value),
                     bounds: Size::new(f32::INFINITY, bounds.height),
                     size: self.text_size.unwrap_or_else(|| renderer.default_size()),
                     line_height: self.text_line_height,
@@ -419,6 +419,6 @@ fn styled(background: impl Into<Background>, bar: impl Into<Background>, color: 
         background: background.into(),
         bar: bar.into(),
         border: border::rounded(2),
-        color: color.into(),
+        color,
     }
 }
