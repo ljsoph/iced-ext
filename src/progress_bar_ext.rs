@@ -19,18 +19,31 @@
 //!     progress_bar(0.0..=100.0, state.progress).into()
 //! }
 //! ```
-use iced_core::border::{self, Border};
-use iced_core::widget::Tree;
-use iced_core::{
-    self, Background, Color, Element, Layout, Length, Padding, Point, Rectangle, Size, Theme,
-    Widget, alignment,
-};
-use iced_core::{Pixels, layout};
-use iced_core::{Text, mouse};
-use iced_core::{renderer, text};
-
 use core::f32;
 use std::ops::RangeInclusive;
+
+use iced_core::Background;
+use iced_core::Color;
+use iced_core::Element;
+use iced_core::Layout;
+use iced_core::Length;
+use iced_core::Padding;
+use iced_core::Pixels;
+use iced_core::Point;
+use iced_core::Rectangle;
+use iced_core::Size;
+use iced_core::Text;
+use iced_core::Theme;
+use iced_core::Widget;
+use iced_core::alignment;
+use iced_core::border::Border;
+use iced_core::border::{self};
+use iced_core::layout;
+use iced_core::mouse;
+use iced_core::renderer;
+use iced_core::text;
+use iced_core::widget::Tree;
+use iced_core::{self};
 
 /// A bar that displays progress.
 ///
@@ -186,19 +199,11 @@ where
     }
 
     fn width(&self) -> Length {
-        if self.is_vertical {
-            self.girth
-        } else {
-            self.length
-        }
+        if self.is_vertical { self.girth } else { self.length }
     }
 
     fn height(&self) -> Length {
-        if self.is_vertical {
-            self.length
-        } else {
-            self.girth
-        }
+        if self.is_vertical { self.length } else { self.girth }
     }
 }
 
@@ -214,12 +219,7 @@ where
         }
     }
 
-    fn layout(
-        &mut self,
-        _tree: &mut Tree,
-        _renderer: &Renderer,
-        limits: &layout::Limits,
-    ) -> layout::Node {
+    fn layout(&mut self, _tree: &mut Tree, _renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
         layout::atomic(limits, self.width(), self.height())
     }
 
@@ -235,11 +235,7 @@ where
     ) {
         let bounds = layout.bounds();
         let (range_start, range_end) = self.range.clone().into_inner();
-        let length = if self.is_vertical {
-            bounds.height
-        } else {
-            bounds.width
-        };
+        let length = if self.is_vertical { bounds.height } else { bounds.width };
         let active_progress_length = if range_start >= range_end {
             0.0
         } else {
@@ -286,16 +282,9 @@ where
 
         if self.show_percentage {
             let (x, align_x) = match self.alignment {
-                alignment::Horizontal::Left => {
-                    (bounds.x + self.padding.left, text::Alignment::Left)
-                }
-                alignment::Horizontal::Center => {
-                    (bounds.x + (bounds.width / 2.0), text::Alignment::Center)
-                }
-                alignment::Horizontal::Right => (
-                    bounds.x + bounds.width - self.padding.right,
-                    text::Alignment::Right,
-                ),
+                alignment::Horizontal::Left => (bounds.x + self.padding.left, text::Alignment::Left),
+                alignment::Horizontal::Center => (bounds.x + (bounds.width / 2.0), text::Alignment::Center),
+                alignment::Horizontal::Right => (bounds.x + bounds.width - self.padding.right, text::Alignment::Right),
             };
             renderer.fill_text(
                 Text {
@@ -317,16 +306,13 @@ where
     }
 }
 
-impl<'a, Message, Theme, Renderer> From<ProgressBar<'a, Theme, Renderer>>
-    for Element<'a, Message, Theme, Renderer>
+impl<'a, Message, Theme, Renderer> From<ProgressBar<'a, Theme, Renderer>> for Element<'a, Message, Theme, Renderer>
 where
     Message: 'a,
     Theme: 'a + Catalog,
     Renderer: 'a + text::Renderer,
 {
-    fn from(
-        progress_bar: ProgressBar<'a, Theme, Renderer>,
-    ) -> Element<'a, Message, Theme, Renderer> {
+    fn from(progress_bar: ProgressBar<'a, Theme, Renderer>) -> Element<'a, Message, Theme, Renderer> {
         Element::new(progress_bar)
     }
 }

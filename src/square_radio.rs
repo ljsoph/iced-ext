@@ -63,8 +63,7 @@ where
     }
 }
 
-impl<'a, Message, Theme, Renderer> Widget<Message, Theme, Renderer>
-    for SquareRadio<'a, Message, Theme, Renderer>
+impl<'a, Message, Theme, Renderer> Widget<Message, Theme, Renderer> for SquareRadio<'a, Message, Theme, Renderer>
 where
     Message: Clone,
     Theme: Catalog,
@@ -77,12 +76,7 @@ where
         }
     }
 
-    fn layout(
-        &mut self,
-        _tree: &mut widget::Tree,
-        _renderer: &Renderer,
-        _limits: &layout::Limits,
-    ) -> layout::Node {
+    fn layout(&mut self, _tree: &mut widget::Tree, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node {
         layout::Node::new([self.size, self.size].into())
     }
 

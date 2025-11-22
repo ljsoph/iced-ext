@@ -1,0 +1,9 @@
+# Stable
+max_width = 120
+# fn_params_layout = "Compressed"
+
+
+# Unstable
+unstable_features = true
+imports_granularity = "Item"
+group_imports = "StdExternalCrate"
