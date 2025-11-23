@@ -182,16 +182,16 @@ where
         self
     }
 
-    /// Sets the [`Padding`] of the current value.
+    /// Show the current percentage of the [`ProgressBar`].
+    ///
+    /// By default, the percentage is shown.
     #[must_use]
     pub fn percentage(mut self, show_percentage: bool) -> Self {
         self.show_percentage = show_percentage;
         self
     }
 
-    /// Show the current percentage on the [`ProgressBar`].
-    ///
-    /// By default, the percentage is shown.
+    /// Set the font of the [`ProgressBar`].
     #[must_use]
     pub fn font(mut self, font: impl Into<Renderer::Font>) -> Self {
         self.font = Some(font.into());
