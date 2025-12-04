@@ -1188,12 +1188,25 @@ pub mod menu {
                         height: box_size,
                     };
 
-                    // TODO: Border color when hovered
+                    if is_hovered {
+                        renderer.fill_quad(
+                            renderer::Quad {
+                                bounds: Rectangle {
+                                    x: option_bounds.x + style.border.width,
+                                    width: option_bounds.width - style.border.width * 2.0,
+                                    ..option_bounds
+                                },
+                                border: border::rounded(style.border.radius),
+                                ..renderer::Quad::default()
+                            },
+                            style.selected_background,
+                        );
+                    }
+
                     renderer.fill_quad(
                         renderer::Quad {
                             bounds: box_bounds,
                             border: style.checkbox.border,
-
                             ..renderer::Quad::default()
                         },
                         style.checkbox.background,
@@ -1227,21 +1240,6 @@ pub mod menu {
                                 style.checkbox.icon_color
                             },
                             *viewport,
-                        );
-                    }
-
-                    if is_hovered {
-                        renderer.fill_quad(
-                            renderer::Quad {
-                                bounds: Rectangle {
-                                    x: option_bounds.x + style.border.width,
-                                    width: option_bounds.width - style.border.width * 2.0,
-                                    ..option_bounds
-                                },
-                                border: border::rounded(style.border.radius),
-                                ..renderer::Quad::default()
-                            },
-                            style.selected_background,
                         );
                     }
 
